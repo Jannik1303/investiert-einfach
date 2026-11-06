@@ -19,3 +19,311 @@
     * {
       box-sizing: border-box;
     }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(212,176,114,0.12), transparent 25%),
+        linear-gradient(135deg, #faf8f5 0%, #f4eee7 60%, #efe7de 100%);
+    }
+
+    .left {
+      padding: 60px 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 5.4rem);
+      line-height: 0.95;
+      font-weight: 500;
+      margin: 0 0 24px 0;
+    }
+
+    .line {
+      width: 72px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .sub {
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      line-height: 1.6;
+      color: #3f3a35;
+      max-width: 580px;
+      margin-bottom: 28px;
+    }
+
+    .claim {
+      font-size: 1.15rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 34px;
+    }
+
+    .contact {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(38,38,38,0.22);
+    }
+
+    .contact a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .chart-card {
+      width: min(620px, 100%);
+      aspect-ratio: 1 / 1;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(180,138,58,0.2);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+      backdrop-filter: blur(4px);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-title {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a7e70;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .grid line {
+      stroke: rgba(80,70,60,0.10);
+      stroke-width: 1;
+    }
+
+    .axis {
+      stroke: rgba(70,60,50,0.25);
+      stroke-width: 1.5;
+    }
+
+    .bar {
+      fill: rgba(180,138,58,0.16);
+      transform-box: fill-box;
+      transform-origin: bottom;
+      animation: growBars 4s ease-in-out infinite;
+    }
+
+    .bar.b1 { animation-delay: 0.1s; }
+    .bar.b2 { animation-delay: 0.25s; }
+    .bar.b3 { animation-delay: 0.4s; }
+    .bar.b4 { animation-delay: 0.55s; }
+    .bar.b5 { animation-delay: 0.7s; }
+    .bar.b6 { animation-delay: 0.85s; }
+
+    .gold-line-path {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: drawLine 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(180,138,58,0.18));
+    }
+
+    .gold-area {
+      fill: rgba(180,138,58,0.08);
+      opacity: 0;
+      animation: fadeArea 4s ease-in-out infinite;
+    }
+
+    .dot {
+      fill: var(--gold);
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: showDots 4s ease-in-out infinite;
+    }
+
+    .dot.d1 { animation-delay: 0.7s; }
+    .dot.d2 { animation-delay: 1.2s; }
+    .dot.d3 { animation-delay: 1.7s; }
+    .dot.d4 { animation-delay: 2.2s; }
+    .dot.d5 { animation-delay: 2.7s; }
+    .dot.d6 { animation-delay: 3s; }
+
+    .glow {
+      fill: none;
+      stroke: rgba(214,180,116,0.25);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: drawLine 4s ease-in-out infinite;
+    }
+
+    @keyframes drawLine {
+      0%   { stroke-dashoffset: 900; }
+      20%  { stroke-dashoffset: 900; }
+      65%  { stroke-dashoffset: 0; }
+      85%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -40; }
+    }
+
+    @keyframes fadeArea {
+      0%, 28% { opacity: 0; }
+      55%, 85% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+
+    @keyframes growBars {
+      0%, 18%   { transform: scaleY(0.18); opacity: 0.35; }
+      45%, 80%  { transform: scaleY(1); opacity: 1; }
+      100%      { transform: scaleY(0.18); opacity: 0.35; }
+    }
+
+    @keyframes showDots {
+      0%, 45% { opacity: 0; transform: scale(0.6); }
+      55%, 80% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(1); }
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .left {
+        padding: 40px 26px 24px;
+      }
+
+      .right {
+        padding: 0 18px 30px;
+      }
+
+      h1 {
+        font-size: 3.2rem;
+      }
+
+      .chart-card {
+        aspect-ratio: 1 / 1.05;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="left">
+      <div class="brand">Investiert einfach.</div>
+      <h1>Hier entsteht<br>etwas Neues&nbsp;…</h1>
+      <div class="line"></div>
+      <div class="sub">
+        Der neue Internetauftritt von Jannik Siever ist bald für Sie da.
+      </div>
+      <div class="claim">
+        Vorsorge. Investments. Persönliche Beratung.
+      </div>
+      <div class="contact">
+        Kontakt:
+        <a href="mailto:jannik@investiert-einfach.de">jannik@investiert-einfach.de</a>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="chart-card">
+        <div class="chart-title">im aufbau</div>
+
+        <svg viewBox="0 0 600 600" aria-hidden="true">
+          <g class="grid">
+            <line x1="80" y1="120" x2="540" y2="120"/>
+            <line x1="80" y1="200" x2="540" y2="200"/>
+            <line x1="80" y1="280" x2="540" y2="280"/>
+            <line x1="80" y1="360" x2="540" y2="360"/>
+            <line x1="80" y1="440" x2="540" y2="440"/>
+          </g>
+
+          <line class="axis" x1="80" y1="470" x2="540" y2="470"/>
+          <line class="axis" x1="80" y1="470" x2="80" y2="100"/>
+
+          <rect class="bar b1" x="110" y="380" width="38" height="90" rx="8"/>
+          <rect class="bar b2" x="175" y="340" width="38" height="130" rx="8"/>
+          <rect class="bar b3" x="240" y="315" width="38" height="155" rx="8"/>
+          <rect class="bar b4" x="305" y="265" width="38" height="205" rx="8"/>
+          <rect class="bar b5" x="370" y="225" width="38" height="245" rx="8"/>
+          <rect class="bar b6" x="435" y="170" width="38" height="300" rx="8"/>
+
+          <path class="gold-area"
+            d="M110 405
+               C150 390, 165 360, 194 350
+               S255 328, 259 320
+               S324 275, 324 275
+               S386 235, 389 230
+               S455 178, 454 175
+               L454 470 L110 470 Z"/>
+
+          <path class="glow"
+            d="M110 405
+               C150 390, 165 360, 194 350
+               S255 328, 259 320
+               S324 275, 324 275
+               S386 235, 389 230
+               S455 178, 454 175"/>
+
+          <path class="gold-line-path"
+            d="M110 405
+               C150 390, 165 360, 194 350
+               S255 328, 259 320
+               S324 275, 324 275
+               S386 235, 389 230
+               S455 178, 454 175"/>
+
+          <circle class="dot d1" cx="110" cy="405" r="6"/>
+          <circle class="dot d2" cx="194" cy="350" r="6"/>
+          <circle class="dot d3" cx="259" cy="320" r="6"/>
+          <circle class="dot d4" cx="324" cy="275" r="6"/>
+          <circle class="dot d5" cx="389" cy="230" r="6"/>
+          <circle class="dot d6" cx="454" cy="175" r="6"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
